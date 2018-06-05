@@ -1,0 +1,28 @@
+reloaded_yes = {
+  material_contexts = {
+    surface_material = ""
+  }
+  
+  shader = "gui:DIFFUSE_MAP"
+  
+  textures = {
+    diffuse_map = "textures/LockedAndLoaded/reloaded_yes"
+  }
+  
+  variables = {
+  }
+}
+reloaded_nope = {
+  material_contexts = {
+    surface_material = ""
+  }
+  
+  shader = "gui:DIFFUSE_MAP"
+  
+  textures = {
+    diffuse_map = "textures/LockedAndLoaded/reloaded_nope"
+  }
+  
+  variables = {
+  }
+}

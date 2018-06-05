@@ -1,0 +1,15 @@
+mod = [
+	"LockedAndLoaded"
+]
+
+package = [
+	"resource_packages/LockedAndLoaded/LockedAndLoaded"
+]
+
+lua = [
+	"scripts/mods/LockedAndLoaded/*"
+]
+
+material = [
+  "materials/LockedAndLoaded/*"
+]

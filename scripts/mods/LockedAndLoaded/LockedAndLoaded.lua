@@ -74,8 +74,8 @@ end
 --]]
 
 -- Hook to perform updates to UI
-mod:hook("MatchmakingManager.update", function(func, self, dt, ...)
-	if mod.reloaded_ready and Managers.world:world("level_world") then
+mod:hook(MatchmakingManager, "update", function(func, self, dt, ...)
+	if mod.reloaded_ready and not Managers.player.network_manager.matchmaking_manager._ingame_ui.current_view and Managers.world:world("level_world") then
 		if not mod.reloaded_gui and Managers.world:world("top_ingame_view") then
 			mod:create_gui()
 		end
@@ -86,52 +86,52 @@ mod:hook("MatchmakingManager.update", function(func, self, dt, ...)
 	func(self, dt, ...)
 end)
 
-mod.mission_windows = {
-	"MatchmakingStateIngame",
-	"StartGameView", --Select Mission screens
-	"VMFOptionsView", --VMF options
-	--[["StartGameWindowAdventure",
-	"StartGameWindowAdventureSettings",
-	"StartGameWindowDifficulty",
-	"StartGameWindowGameMode",
-	"StartGameWindowLobbyBrowser",
-	"StartGameWindowMission",
-	"StartGameWindowMissionSelection",
-	"StartGameWindowMutator",
-	"StartGameWindowMutatorGrid",
-	"StartGameWindowMutatorList",
-	"StartGameWindowMutatorSummary",
-	"StartGameWindowSettings",
-	"StartGameWindowTwitchGameSettings",
-	"StartGameWindowTwitchLogin",--]]
+-- mod.mission_windows = {
+-- 	"MatchmakingStateIngame",
+-- 	"StartGameView", --Select Mission screens
+-- 	"VMFOptionsView", --VMF options
+-- 	"StartGameWindowAdventure",
+-- 	"StartGameWindowAdventureSettings",
+-- 	"StartGameWindowDifficulty",
+-- 	"StartGameWindowGameMode",
+-- 	"StartGameWindowLobbyBrowser",
+-- 	"StartGameWindowMission",
+-- 	"StartGameWindowMissionSelection",
+-- 	"StartGameWindowMutator",
+-- 	"StartGameWindowMutatorGrid",
+-- 	"StartGameWindowMutatorList",
+-- 	"StartGameWindowMutatorSummary",
+-- 	"StartGameWindowSettings",
+-- 	"StartGameWindowTwitchGameSettings",
+-- 	"StartGameWindowTwitchLogin",
 
-	"StateTitleScreenMainMenu",
-	"CharacterSelectionView",
-	"StartMenuView",
-	"OptionsView",
-	"HeroView"
-}
+-- 	"StateTitleScreenMainMenu",
+-- 	"CharacterSelectionView",
+-- 	"StartMenuView",
+-- 	"OptionsView",
+-- 	"HeroView"
+-- }
 
-for _, i in pairs(mod.mission_windows) do
-	mod:hook(i ..".on_enter", function(func, ...)
-		func(...)
+-- for _, i in pairs(mod.mission_windows) do
+-- 	mod:hook(i ..".on_enter", function(func, ...)
+-- 		func(...)
 
-		mod.reloaded_ready = false
-	end)
+-- 		mod.reloaded_ready = false
+-- 	end)
 
-	mod:hook(i ..".on_exit", function(func, ...)
-		func(...)
-		mod.reloaded_ready = true
-	end)
-end
+-- 	mod:hook(i ..".on_exit", function(func, ...)
+-- 		func(...)
+-- 		mod.reloaded_ready = true
+-- 	end)
+-- end
 
-mod:hook("StateInGameRunning.on_exit", function(func, ...)
+mod:hook(StateInGameRunning, "on_exit", function(func, ...)
 	func(...)
 
 	mod.reloaded_ready = false
 end)
 
-mod:hook("StateInGameRunning.event_game_started", function(func, ...)
+mod:hook(StateInGameRunning, "event_game_started", function(func, ...)
 	func(...)
 
 	mod.reloaded_ready = true
@@ -168,14 +168,14 @@ end
 -- Call when governing settings checkbox is unchecked
 mod.on_disabled = function(is_first_call)
 	mod.reloaded_ready = true
-	mod:disable_all_hooks()
+	-- mod:disable_all_hooks()
 end
 
 -- Call when governing settings checkbox is checked
 mod.on_enabled = function(is_first_call)
-	mod:echo('LockedAndLoaded Initialized')
+	-- mod:echo('LockedAndLoaded Initialized')
 	mod.reloaded_ready = true
-	mod:enable_all_hooks()
+	-- mod:enable_all_hooks()
 end
 
 
